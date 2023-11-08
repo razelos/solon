@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import messagebox
 from functools import partial
 import csv
-
+import datetime
 def run():
 
   from logic.solon_insert import insert_data
@@ -14,7 +14,7 @@ def run():
   from logic.solon_delete import delete_data
   from ui.solon_show_data import show_data
   from ui.start_search import start_search
-  from logic.timestamp import get_timestamp
+  from logic.timestamp import get_timestamp, saved_time
 
   # File Paths that are needed 
   # Get the current directory of your script
@@ -269,14 +269,17 @@ def run():
 
   # Set up the time Frame
   def time_frame(root):
+
+
     time_frame = ttk.Frame(root)
     # time_frame.pack(side = 'top', pady = 10)
 
-    timestamp, total_search_time, total_searches = get_timestamp()
+    timestamp, total_searches = get_timestamp()
+    hours, minutes = saved_time(total_searches[0])
     global timestamp_label, search_time_label, total_searches_label
     timestamp_label = tk.Label(time_frame, text="ΤΕΛΕΥΤΑΙΑ ΑΝΑΖΗΤΗΣΗ: " + timestamp[0], font = FONT_OPTIONS)
     timestamp_label.grid(row = 0, pady = 0)
-    search_time_label = tk.Label(time_frame, text = "Ο ΣΥΝΟΛΙΚΟΣ ΧΡΟΝΟΣ ΑΝΑΖΗΤΗΣΗΣ ΕΙΝΑΙ " + total_search_time[0], font = ("Arial", 9))
+    search_time_label = tk.Label(time_frame, text = "ΕΧΕΤΕ ΓΛΥΤΩΣΕΙ ΣΥΝΟΛΙΚΑ " + hours + " ΩΡΕΣ ΚΑΙ " + minutes + " ΛΕΠΤΑ ΑΝΑΖΗΤΗΣΗΣ!", font = ("Arial", 9))
     search_time_label.grid(row = 1, pady = 0)
     total_searches_label = tk.Label(time_frame, text = "ΕΧΕΤΕ ΠΡΑΓΜΑΤΟΠΟΙΗΣΕΙ ΣΥΝΟΛΙΚΑ " + total_searches[0] + " ΑΝΑΖΗΤΗΣΕΙΣ", font = ("Arial", 9))
     total_searches_label.grid(row = 2, pady = 0)

@@ -37,7 +37,9 @@ URL = 'https://extapps.solon.gov.gr/mojwp/faces/TrackLdoPublic'
 from logic.search_status import stop_search, cancel_search_var
 from logic.solon_load import load_csv
 from ui.solon_show_data import show_data
-from logic.timestamp import time_stamp, get_timestamp
+from logic.timestamp import time_stamp, get_timestamp, saved_time
+
+
 # Peform the search
 def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_label, search_time_label, total_searches_label):
   try:
@@ -45,7 +47,7 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
 
     output_data = []
 
-    start_time = datetime.datetime.now().strftime("%H:%M:%S")
+    # start_time = datetime.datetime.now().strftime("%H:%M:%S")
 
     # Set the logging level to suppress WebDriver's DevTools messages
     logging.getLogger('selenium').setLevel(logging.ERROR)
@@ -144,10 +146,10 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
         progress_var.set(i + 1)
 
 
-    end_time = datetime.datetime.now().strftime("%H:%M:%S")
+    # end_time = datetime.datetime.now().strftime("%H:%M:%S")
 
     driver.quit()
-    time_stamp(start_time, end_time, n)
+    time_stamp(n)
     
     def play_sound():
       try:
@@ -168,9 +170,11 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
         result = output_data[i]
         csvwriter.writerow([result])
 
-    timestamp, total_search_time, total_searches = get_timestamp()
+    timestamp, total_searches = get_timestamp()
+
+    hours, minutes = saved_time(total_searches[0])
     timestamp_label.config(text="ΤΕΛΕΥΤΑΙΑ ΑΝΑΖΗΤΗΣΗ: " + timestamp[0])
-    search_time_label.config(text = "Ο ΣΥΝΟΛΙΚΟΣ ΧΡΟΝΟΣ ΑΝΑΖΗΤΗΣΗΣ ΕΙΝΑΙ " + total_search_time[0])
+    search_time_label.config(text = "ΕΧΕΤΕ ΓΛΥΤΩΣΕΙ ΣΥΝΟΛΙΚΑ " + hours + " ΩΡΕΣ ΚΑΙ " + minutes + " ΛΕΠΤΑ ΑΝΑΖΗΤΗΣΗΣ")
     total_searches_label.config(text = "ΕΧΕΤΕ ΠΡΑΓΜΑΤΟΠΟΙΗΣΕΙ ΣΥΝΟΛΙΚΑ " + total_searches[0] + " ΑΝΑΖΗΤΗΣΕΙΣ")
     progress_window.destroy()
     cancel_search_var()
