@@ -83,7 +83,7 @@ def delete_data(tree, root):
         input_data.pop(index)
         info_data.pop(index)
         output_data.pop(index)
-
+        print(output_data)
         # Write the updated data back to their respective files
         write_data(INPATH, input_data)
         write_data(INFOPATH, info_data)

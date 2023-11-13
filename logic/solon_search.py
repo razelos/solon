@@ -1,8 +1,6 @@
 import os
-import csv
 import time
 import pygame
-import datetime
 import logging
 from tkinter import messagebox
 from selenium import webdriver
@@ -38,6 +36,7 @@ from logic.search_status import stop_search, cancel_search_var
 from logic.solon_load import load_csv
 from ui.solon_show_data import show_data
 from logic.timestamp import time_stamp, get_timestamp, saved_time
+from logic.write_data import write_data
 
 
 # Peform the search
@@ -134,9 +133,9 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
 
         # add decision to output data
         if dtext.isspace():
-          output_data.append('ΕΚΚΡΕΜΕΙ ΑΠΟΦΑΣΗ')
+          output_data.append(['ΕΚΚΡΕΜΕΙ ΑΠΟΦΑΣΗ'])
         else:
-          output_data.append(dtext)
+          output_data.append([dtext])
 
       except TimeoutException as TE:
         handle_error_box()
@@ -164,11 +163,13 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
     # print(input_data)
     # print(output_data)
     # Update the CSV files and timestamp and then load it
-    with open(OUTPATH, 'w', newline='', encoding='utf-8') as csvfile:
-      csvwriter = csv.writer(csvfile)
-      for i in range(len(output_data)):
-        result = output_data[i]
-        csvwriter.writerow([result])
+    # with open(OUTPATH, 'w', newline='', encoding='utf-8') as csvfile:
+    #   csvwriter = csv.writer(csvfile)
+    #   for i in range(len(output_data)):
+    #     result = output_data[i]
+    #     csvwriter.writerow([result])
+    write_data(OUTPATH, output_data)
+
 
     timestamp, total_searches = get_timestamp()
 
