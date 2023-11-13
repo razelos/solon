@@ -144,7 +144,7 @@ def run():
   # SECONDARY_COLOR = "#FFA500"  # Orange
 
   # Define Font options for the Text
-  FONT_OPTIONS = ("Calibri", 13)
+  FONT_OPTIONS = ("Arial", 13)
   root = tk.Tk()
   root.title("Solon Search")
   # Configure the root window's background color
