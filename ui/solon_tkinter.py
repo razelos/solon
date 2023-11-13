@@ -5,7 +5,6 @@ import tkinter as tk
 from tkinter import messagebox
 from functools import partial
 import csv
-import datetime
 def run():
 
   from logic.solon_insert import insert_data
@@ -145,8 +144,7 @@ def run():
   # SECONDARY_COLOR = "#FFA500"  # Orange
 
   # Define Font options for the Text
-  FONT_OPTIONS = ("Arial", 13)
-
+  FONT_OPTIONS = ("Calibri", 13)
   root = tk.Tk()
   root.title("Solon Search")
   # Configure the root window's background color

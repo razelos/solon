@@ -46,15 +46,17 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
 
     output_data = []
 
-    # start_time = datetime.datetime.now().strftime("%H:%M:%S")
 
     # Set the logging level to suppress WebDriver's DevTools messages
-    logging.getLogger('selenium').setLevel(logging.ERROR)
+    # logging.getLogger('selenium').setLevel(logging.ERROR)
 
 
     # initalize web driver and settings
     chromeOptions = Options()
     chromeOptions.add_argument("--headless")
+    # next line to stop DevTools listening on ws://127.0.0.1:65051/devtools/browser/1e12e06b-e9f3-40fc-953d-7e116e6241e1
+    # from appearing
+    chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
     chromeOptions.binary_location = (CHROME_PATH)
     service_obj = Service(CHROMEDRIVER_PATH)
     driver = webdriver.Chrome(service=service_obj, options=chromeOptions)
@@ -71,15 +73,15 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
         if ok_box:
           # Click the OK button to dismiss the error box
           driver.find_element(By.XPATH, ok_button_xpath).click()
-          output_data.append('ΕΛΕΓΞΤΕ ΣΤΟΙΧΕΙΑ ΕΙΣΑΓΩΓΗΣ')
+          output_data.append(['ΕΛΕΓΞΤΕ ΣΤΟΙΧΕΙΑ ΕΙΣΑΓΩΓΗΣ'])
       except(TimeoutException, WebDriverException) as e:
         messagebox.showerror("Σφάλμα", "Αδύνατη η σύνδεση στο δίκτυο.")
-        output_data.append('ΥΠΗΡΞΕ ΚΑΠΟΙΟ ΣΦΑΛΜΑ')
+        output_data.append(['ΥΠΗΡΞΕ ΚΑΠΟΙΟ ΣΦΑΛΜΑ'])
         progress_window.destroy()
         cancel_search_var()
         print(e)
       except Exception as E:
-        output_data.append('ΥΠΗΡΞΕ ΚΑΠΟΙΟ ΣΦΑΛΜΑ')
+        output_data.append(['ΥΠΗΡΞΕ ΚΑΠΟΙΟ ΣΦΑΛΜΑ'])
         progress_window.destroy()
         cancel_search_var()
         print(E)
@@ -160,16 +162,7 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
     play_sound()
     progress_var.set(n + 1)
     
-    # print(input_data)
-    # print(output_data)
-    # Update the CSV files and timestamp and then load it
-    # with open(OUTPATH, 'w', newline='', encoding='utf-8') as csvfile:
-    #   csvwriter = csv.writer(csvfile)
-    #   for i in range(len(output_data)):
-    #     result = output_data[i]
-    #     csvwriter.writerow([result])
     write_data(OUTPATH, output_data)
-
 
     timestamp, total_searches = get_timestamp()
 

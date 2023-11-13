@@ -23,8 +23,7 @@ OUTPATH = os.path.join(parent_dir, 'data', 'output_data.csv')
 TEXTS_PATH = os.path.join(parent_dir, 'data', 'cute_texts.csv')
 
 
-FONT_OPTIONS = ("Arial", 13)
-
+FONT_OPTIONS = ("Calibri", 13)
 # List of cute texts
 cute_texts = []
 with open(TEXTS_PATH, 'r', encoding = 'utf-8') as csvfile:

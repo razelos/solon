@@ -20,8 +20,7 @@ INPATH = os.path.join(parent_dir, 'data', 'input_data.csv')
 INFOPATH = os.path.join(parent_dir, 'data', 'info_data.csv')
 OUTPATH = os.path.join(parent_dir, 'data', 'output_data.csv')
 
-FONT_OPTIONS = ("Arial", 13)
-# Function to delete data from both input and output CSV files
+FONT_OPTIONS = ("Calibri", 13)# Function to delete data from both input and output CSV files
 def delete_data(tree, root):
   try:
     # get the selected row
@@ -83,7 +82,6 @@ def delete_data(tree, root):
         input_data.pop(index)
         info_data.pop(index)
         output_data.pop(index)
-        print(output_data)
         # Write the updated data back to their respective files
         write_data(INPATH, input_data)
         write_data(INFOPATH, info_data)
