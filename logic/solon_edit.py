@@ -5,7 +5,6 @@ from logic.write_data import write_data
 from ui.solon_show_data import show_data
 from tkinter import messagebox
 
-
 # File Paths that are needed 
 # Get the current directory of your script
 current_dir = os.path.dirname(__file__)
@@ -27,8 +26,7 @@ def edit_data(entry_window, index, prekat, pregak, preyear, kat_combobox, gak_en
     customer = customer_entry.get()
     antidikos = antidikos_entry.get()
     comment = comment_entry.get()
-    # if the search values have remained the same as previous (pre) 
-    # there is no reason to change the output data
+    # validate values the same way as insert 
     if not (gak and year and kat):
       messagebox.showerror("ΣΦΑΛΜΑ", "ΠΡΕΠΕΙ ΝΑ ΣΥΜΠΛΗΡΩΣΕΤΕ ΔΙΚΑΣΤΗΡΙΟ, Γ.Α.Κ., ΚΑΙ ΕΤΟΣ")
       kat_combobox.focus_set()
@@ -43,13 +41,14 @@ def edit_data(entry_window, index, prekat, pregak, preyear, kat_combobox, gak_en
       messagebox.showerror("ΣΦΑΛΜΑ", "Ο ΓΑΚ ΠΡΕΠΕΙ ΝΑ ΕΙΝΑΙ ΑΝΑΜΕΣΑ ΣΤΟ 1 ΚΑΙ ΣΤΟ 999999")
       gak_entry.focus_set()
       return
-
+    
+    # if the search values have remained the same as previous (pre) 
+    # there is no reason to change the output data
     if prekat == kat and pregak == gak and preyear == year:
       info_data = read_data(INFOPATH)
       info_data[index] = [customer, antidikos, comment]
       write_data(INFOPATH, info_data)
     else:
-
       input_data = read_data(INPATH)
       info_data = read_data(INFOPATH)
       output_data = read_data(OUTPATH)
