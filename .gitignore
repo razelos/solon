@@ -1,6 +1,6 @@
+data
 chrome-win64
 chromedriver-win64
 **/__pycache__/
 logic\__pycache__
 ui\__pycache__
-data
