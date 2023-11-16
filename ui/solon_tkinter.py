@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import  ttk
 import os
-import tkinter as tk
 from tkinter import messagebox
 from functools import partial
 import csv
@@ -145,6 +144,8 @@ def run():
 
   # Define Font options for the Text
   FONT_OPTIONS = ("Arial", 13)
+
+
   root = tk.Tk()
   root.title("Solon Search")
   # Configure the root window's background color
@@ -196,7 +197,7 @@ def run():
         style.configure("Treeview.Heading", font=font)
 
     # Apply the custom font to the headings
-    change_heading_font(("Arial", 14))
+    change_heading_font(("open sans", 14))
 
     tree.heading("Kat", text="ΔΙΚΑΣΤΗΡΙΟ", anchor = "w")
     tree.heading("Gak", text="ΓΑΚ", anchor = "w")
@@ -277,9 +278,9 @@ def run():
     global timestamp_label, search_time_label, total_searches_label
     timestamp_label = tk.Label(time_frame, text="ΤΕΛΕΥΤΑΙΑ ΑΝΑΖΗΤΗΣΗ: " + timestamp[0], font = FONT_OPTIONS)
     timestamp_label.grid(row = 0, pady = 0)
-    search_time_label = tk.Label(time_frame, text = "ΕΧΕΤΕ ΓΛΥΤΩΣΕΙ ΣΥΝΟΛΙΚΑ " + hours + " ΩΡΕΣ ΚΑΙ " + minutes + " ΛΕΠΤΑ ΑΝΑΖΗΤΗΣΗΣ!", font = ("Arial", 9))
+    search_time_label = tk.Label(time_frame, text = "ΕΧΕΤΕ ΓΛΥΤΩΣΕΙ ΣΥΝΟΛΙΚΑ " + hours + " ΩΡΕΣ ΚΑΙ " + minutes + " ΛΕΠΤΑ ΑΝΑΖΗΤΗΣΗΣ!", font = ("open sans", 9))
     search_time_label.grid(row = 1, pady = 0)
-    total_searches_label = tk.Label(time_frame, text = "ΕΧΕΤΕ ΠΡΑΓΜΑΤΟΠΟΙΗΣΕΙ ΣΥΝΟΛΙΚΑ " + total_searches[0] + " ΑΝΑΖΗΤΗΣΕΙΣ", font = ("Arial", 9))
+    total_searches_label = tk.Label(time_frame, text = "ΕΧΕΤΕ ΠΡΑΓΜΑΤΟΠΟΙΗΣΕΙ ΣΥΝΟΛΙΚΑ " + total_searches[0] + " ΑΝΑΖΗΤΗΣΕΙΣ", font = ("open sans", 9))
     total_searches_label.grid(row = 2, pady = 0)
     return time_frame
 

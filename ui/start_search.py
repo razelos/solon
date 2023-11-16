@@ -72,7 +72,8 @@ def start_search(root, tree, timestamp_label, search_time_label, total_searches_
   # Center the progress window on top of the root window
   x = (root_width - progress_window_width) // 2
   y = (root_height - progress_window_height) // 2
-
+  # x = (root_width) // 2
+  # y = (root_height) // 2
   progress_window.geometry(f"{progress_window_width}x{progress_window_height}+{x}+{y}")
 
   text_label = tk.StringVar()

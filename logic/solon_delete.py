@@ -20,7 +20,9 @@ INPATH = os.path.join(parent_dir, 'data', 'input_data.csv')
 INFOPATH = os.path.join(parent_dir, 'data', 'info_data.csv')
 OUTPATH = os.path.join(parent_dir, 'data', 'output_data.csv')
 
+
 FONT_OPTIONS = ("Arial", 13)# Function to delete data from both input and output CSV files
+
 def delete_data(tree, root):
   try:
     # get the selected row

@@ -1,7 +1,6 @@
 import os
 import time
 import pygame
-import logging
 from tkinter import messagebox
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, WebDriverException
@@ -45,11 +44,6 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
     pygame.mixer.init()
 
     output_data = []
-
-
-    # Set the logging level to suppress WebDriver's DevTools messages
-    # logging.getLogger('selenium').setLevel(logging.ERROR)
-
 
     # initalize web driver and settings
     chromeOptions = Options()
@@ -145,9 +139,6 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
       finally:
         i += 1
         progress_var.set(i + 1)
-
-
-    # end_time = datetime.datetime.now().strftime("%H:%M:%S")
 
     driver.quit()
     time_stamp(n)
