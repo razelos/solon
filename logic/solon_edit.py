@@ -3,6 +3,8 @@ from logic.solon_load import load_csv
 from logic.read_data import read_data
 from logic.write_data import write_data
 from ui.solon_show_data import show_data
+from tkinter import messagebox
+
 
 # File Paths that are needed 
 # Get the current directory of your script
@@ -27,6 +29,21 @@ def edit_data(entry_window, index, prekat, pregak, preyear, kat_combobox, gak_en
     comment = comment_entry.get()
     # if the search values have remained the same as previous (pre) 
     # there is no reason to change the output data
+    if not (gak and year and kat):
+      messagebox.showerror("ΣΦΑΛΜΑ", "ΠΡΕΠΕΙ ΝΑ ΣΥΜΠΛΗΡΩΣΕΤΕ ΔΙΚΑΣΤΗΡΙΟ, Γ.Α.Κ., ΚΑΙ ΕΤΟΣ")
+      kat_combobox.focus_set()
+      return
+    # Validate year
+    elif not (int(year) >= 2000 and int(year) <=2100):
+      messagebox.showerror("ΣΦΑΛΜΑ", "ΤΟ ΕΤΟΣ ΠΡΕΠΕΙ ΝΑ ΕΙΝΑΙ ΑΝΑΜΕΣΑ ΣΤΟ 2000 ΚΑΙ ΣΤΟ 2100")
+      year_entry.focus_set()
+      return
+    # Validate Gak Number
+    elif not (int(gak) >= 1 and int(gak) <= 999999):
+      messagebox.showerror("ΣΦΑΛΜΑ", "Ο ΓΑΚ ΠΡΕΠΕΙ ΝΑ ΕΙΝΑΙ ΑΝΑΜΕΣΑ ΣΤΟ 1 ΚΑΙ ΣΤΟ 999999")
+      gak_entry.focus_set()
+      return
+
     if prekat == kat and pregak == gak and preyear == year:
       info_data = read_data(INFOPATH)
       info_data[index] = [customer, antidikos, comment]
