@@ -43,8 +43,7 @@ def update_cute_text(text_label, progress_window):
       time.sleep(5)
     text_label.set("Η Αναζήτηση Ολοκληρώθηκε Επιτυχώς!")
   except Exception as E:
-    print(E)
-
+    pass
 
 def start_search(root, tree, timestamp_label, search_time_label, total_searches_label):
   # Open the CSV file and read data - initialize input_data and output_data lists
@@ -102,6 +101,5 @@ def start_search(root, tree, timestamp_label, search_time_label, total_searches_
     search_thread = threading.Thread(target = solon_search, args=(input_data, progress_var, n, progress_window, tree, timestamp_label, search_time_label, total_searches_label))
     search_thread.start()
   except Exception as E:
-    print(E)
     messagebox.showerror("Σφάλμα", E)
 
