@@ -40,5 +40,3 @@ def load_csv():
     print(E)
     # print(input_data[i], info_data[i], output_data[i])
     # print(combined_row)
-
-load_csv()
