@@ -52,11 +52,12 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
     # from appearing
     chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
     chromeOptions.binary_location = (CHROME_PATH)
-    service_obj = Service(CHROMEDRIVER_PATH)
+
+    service_obj = Service(CHROMEDRIVER_PATH, HideCommandPromptWindow=True, verbose=False)
     driver = webdriver.Chrome(service=service_obj, options=chromeOptions)
     wait = WebDriverWait(driver, 20) # number of seconds to wait 
     driver.get(URL)
-  
+
     # handle one exception - error box
     # example ΕΙΡΗΝΟΔΙΚΕΙΟ ΕΛΕΥΣΙΝΑΣ / 1235 / 2021
     def handle_error_box():
@@ -73,13 +74,10 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
         output_data.append(['ΥΠΗΡΞΕ ΚΑΠΟΙΟ ΣΦΑΛΜΑ'])
         progress_window.destroy()
         cancel_search_var()
-        print(e)
       except Exception as E:
         output_data.append(['ΥΠΗΡΞΕ ΚΑΠΟΙΟ ΣΦΑΛΜΑ'])
         progress_window.destroy()
         cancel_search_var()
-        print(E)
-
 
     i = 0
     while not(stop_search) and i < n:
@@ -90,7 +88,6 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
         katastima = input_data[i][0]
         GakNumber = input_data[i][1]
         YearNumber = input_data[i][2]
-        # print(katastima, GakNumber)
 
         # find and select dropdownbox
         dropdownbox = driver.find_element(By.ID, 'courtOfficeOC::content')
@@ -148,7 +145,7 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
         pygame.mixer.music.load(SOUND_PATH)
         pygame.mixer.music.play()
       except Exception as E:
-        print(E)
+        pass
     
     play_sound()
     progress_var.set(n + 1)
@@ -167,14 +164,11 @@ def solon_search(input_data, progress_var, n, progress_window, tree, timestamp_l
     show_data(data, tree)
 
   except (TimeoutException) as E:
-    print(E)
     handle_error_box(stop_search)
   except(WebDriverException) as E:
     messagebox.showerror("Σφάλμα", "Αδύνατη η σύνδεση στο δίκτυο.")
     progress_window.destroy()
     cancel_search_var()
-    print(E)
   except Exception as E:
-    print(E)
     progress_window.destroy()
     cancel_search_var()
